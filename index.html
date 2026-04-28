@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>SafeCall Guardian</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%234CAF50'/><path d='M30 50 L45 65 L70 35' stroke='white' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+</head>
+<body>
+  <!-- INCOMING CALL SCREEN -->
+  <div id="incoming-call" class="screen active">
+    <div class="call-header">
+      <div class="caller-avatar">👤</div>
+      <div class="caller-name">Unknown Caller</div>
+      <div class="incoming-label">incoming call</div>
+    </div>
+    <div class="call-actions">
+      <div class="btn-group">
+        <div class="call-btn decline-btn" id="decline-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.71l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.73-1.68-1.36-2.66-1.85-.33-.16-.56-.5-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg>
+        </div>
+        <div class="btn-label">Decline</div>
+      </div>
+      <div class="btn-group">
+        <div class="call-btn accept-btn" id="accept-btn">
+          <svg viewBox="0 0 24 24"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+        </div>
+        <div class="btn-label">Accept</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IN-CALL SCREEN -->
+  <div id="in-call" class="screen">
+    <div class="protection-status">
+      <div class="status-dot"></div>
+      <div class="status-text">PROTECTION ACTIVE</div>
+    </div>
+    
+    <div class="audio-visualizer">
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+      <div class="wave-bar"></div>
+    </div>
+
+    <div class="transcript-container">
+      <div id="transcript" class="transcript-text">
+        <span class="transcript-placeholder">Listening...</span>
+      </div>
+    </div>
+
+    <div class="risk-container">
+      <div class="risk-label">Risk Level</div>
+      <div id="risk-value" class="risk-value risk-low">0%</div>
+      <div id="demo-badge" class="demo-badge hidden">DEMO MODE</div>
+    </div>
+  </div>
+
+  <!-- ALERT SCREEN -->
+  <div id="alert-screen" class="screen">
+    <div class="alert-content">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-title">SCAM DETECTED</div>
+      <div class="alert-subtitle">Do NOT share your code</div>
+      <div class="alert-warning">
+        <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+        <span>Warning. Possible scam detected.</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
