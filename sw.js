@@ -1,10 +1,11 @@
 const CACHE_NAME = 'safecall-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json'
+  './',
+  './index.html',
+  './style.css',
+  './app.js',
+  './manifest.json',
+  './icon.svg'
 ];
 
 self.addEventListener('install', event => {

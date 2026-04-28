@@ -1,8 +1,5 @@
-/* SafeCall Guardian - Additional Styles */
+/* SafeCall Guardian - Complete Styles */
 
-@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700;800&display=swap');
-
-/* Enhanced base styles */
 * {
   margin: 0;
   padding: 0;
@@ -23,16 +20,19 @@
   --glass-border: rgba(255, 255, 255, 0.1);
 }
 
-/* Typography */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
   background: var(--ios-darker);
   color: white;
-  overflow: hidden;
   touch-action: manipulation;
 }
 
-/* FIX 3 — плавный переход экранов с blur */
+/* Screen base */
 .screen {
   position: fixed;
   top: 0;
@@ -47,6 +47,7 @@ body {
   transform: translateY(20px);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  background: var(--ios-darker);
 }
 
 .screen.active {
@@ -55,7 +56,130 @@ body {
   transform: translateY(0);
 }
 
-/* Incoming Call Screen */
+/* ==================== ONBOARDING ==================== */
+#onboarding {
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.onboarding-content {
+  max-width: 320px;
+}
+
+.onboarding-icon {
+  font-size: 80px;
+  margin-bottom: 24px;
+}
+
+.onboarding-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.onboarding-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 32px;
+}
+
+.btn-primary {
+  background: linear-gradient(145deg, #34C759 0%, #2db150 100%);
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 14px;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(52, 199, 89, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:active {
+  transform: scale(0.96);
+}
+
+/* ==================== HOME ==================== */
+#home {
+  padding: 50px 20px 30px;
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.home-header h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(52, 199, 89, 0.15);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--ios-green);
+}
+
+.status-badge .status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ios-green);
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.home-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 20px 24px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.home-btn:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.home-btn-icon {
+  font-size: 28px;
+}
+
+.home-btn-text {
+  font-size: 17px;
+  font-weight: 500;
+  color: white;
+}
+
+/* ==================== INCOMING CALL ==================== */
 #incoming-call {
   background: linear-gradient(180deg, #0a0a0a 0%, #151515 30%, #0d0d0d 70%, #0a0a0a 100%);
   justify-content: space-between;
@@ -81,8 +205,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 52px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
-              inset 0 2px 4px rgba(255, 255, 255, 0.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -90,18 +213,14 @@ body {
   font-size: 28px;
   font-weight: 600;
   margin-bottom: 6px;
-  letter-spacing: -0.3px;
-  color: #fff;
 }
 
 .incoming-label {
   font-size: 13px;
   color: var(--ios-gray);
   text-transform: lowercase;
-  letter-spacing: 0.5px;
 }
 
-/* Call action buttons */
 .call-actions {
   display: flex;
   justify-content: center;
@@ -128,33 +247,24 @@ body {
 
 .decline-btn {
   background: linear-gradient(145deg, #FF3B30 0%, #d63027 100%);
-  box-shadow: 0 8px 28px rgba(255, 59, 48, 0.45),
-              0 4px 12px rgba(255, 59, 48, 0.3);
+  box-shadow: 0 8px 28px rgba(255, 59, 48, 0.45);
 }
 
 .accept-btn {
   background: linear-gradient(145deg, #34C759 0%, #2db150 100%);
-  box-shadow: 0 8px 28px rgba(52, 199, 89, 0.45),
-              0 4px 12px rgba(52, 199, 89, 0.3);
+  box-shadow: 0 8px 28px rgba(52, 199, 89, 0.45);
   animation: pulse-green 2s ease-in-out infinite;
 }
 
 @keyframes pulse-green {
-  0%, 100% { 
-    box-shadow: 0 8px 28px rgba(52, 199, 89, 0.45),
-                0 4px 12px rgba(52, 199, 89, 0.3);
-  }
-  50% { 
-    box-shadow: 0 8px 40px rgba(52, 199, 89, 0.6),
-                0 4px 16px rgba(52, 199, 89, 0.4);
-  }
+  0%, 100% { box-shadow: 0 8px 28px rgba(52, 199, 89, 0.45); }
+  50% { box-shadow: 0 8px 40px rgba(52, 199, 89, 0.6); }
 }
 
 .call-btn svg {
   width: 30px;
   height: 30px;
   fill: white;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 
 .btn-label {
@@ -171,7 +281,7 @@ body {
   align-items: center;
 }
 
-/* In-Call Screen */
+/* ==================== IN-CALL ==================== */
 #in-call {
   background: linear-gradient(180deg, #0d0d0d 0%, #141414 50%, #0a0a0a 100%);
   padding: 45px 20px 25px;
@@ -192,11 +302,6 @@ body {
   background: var(--ios-green);
   animation: blink 1.5s ease-in-out infinite;
   box-shadow: 0 0 8px rgba(52, 199, 89, 0.6);
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.9); }
 }
 
 .status-text {
@@ -266,9 +371,10 @@ body {
   font-style: italic;
 }
 
-/* Risk Indicator */
+/* Risk */
 .risk-container {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .risk-label {
@@ -283,27 +389,11 @@ body {
   font-size: 52px;
   font-weight: 700;
   transition: color 0.3s ease, text-shadow 0.3s ease;
-  letter-spacing: -1px;
 }
 
-.risk-low { 
-  color: var(--ios-gray); 
-  text-shadow: 0 0 20px rgba(142, 142, 147, 0.3);
-}
-.risk-medium { 
-  color: var(--ios-orange); 
-  text-shadow: 0 0 30px rgba(255, 149, 0, 0.4);
-}
-.risk-high { 
-  color: var(--ios-red); 
-  text-shadow: 0 0 40px rgba(255, 59, 48, 0.5);
-  animation: risk-pulse 0.5s ease-in-out infinite;
-}
-
-@keyframes risk-pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-}
+.risk-low { color: var(--ios-gray); }
+.risk-medium { color: var(--ios-orange); }
+.risk-high { color: var(--ios-red); }
 
 .demo-badge {
   display: inline-block;
@@ -318,7 +408,25 @@ body {
   text-transform: uppercase;
 }
 
-/* Alert Screen */
+/* SOS Button */
+.sos-btn {
+  background: linear-gradient(145deg, #FF3B30 0%, #d63027 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.2s ease;
+}
+
+.sos-btn:active {
+  transform: scale(0.96);
+}
+
+/* ==================== ALERT ==================== */
 #alert-screen {
   background: linear-gradient(180deg, #FF3B30 0%, #d63027 50%, #b82622 100%);
   justify-content: center;
@@ -361,7 +469,6 @@ body {
   margin-bottom: 14px;
   text-transform: uppercase;
   letter-spacing: 3px;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
 .alert-subtitle {
@@ -379,7 +486,6 @@ body {
   background: rgba(255, 255, 255, 0.2);
   padding: 18px 28px;
   border-radius: 14px;
-  backdrop-filter: blur(10px);
 }
 
 .alert-warning svg {
@@ -393,12 +499,122 @@ body {
   font-weight: 600;
 }
 
+/* ==================== CONTACTS ==================== */
+#contacts, #history {
+  padding: 50px 20px 30px;
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.back-btn {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: white;
+  padding: 10px 16px;
+  font-size: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.screen-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.contacts-content, .history-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.add-contact {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+#contact-input {
+  flex: 1;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: white;
+  padding: 14px 16px;
+  font-size: 16px;
+  border-radius: 12px;
+  outline: none;
+}
+
+#contact-input::placeholder {
+  color: var(--ios-gray);
+}
+
+#add-contact-btn {
+  background: var(--ios-green);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.contacts-list, .history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-item, .history-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-item span, .history-item span {
+  font-size: 15px;
+}
+
+.delete-btn {
+  background: var(--ios-red);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.history-item {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.history-time {
+  font-size: 12px;
+  color: var(--ios-gray);
+}
+
+.history-risk {
+  font-size: 14px;
+  font-weight: 600;
+}
+
 /* Utility */
 .hidden {
   display: none !important;
 }
 
-/* Scrollbar styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -412,17 +628,11 @@ body {
   border-radius: 2px;
 }
 
-/* Safe area for notched devices */
+/* Safe area */
 @supports (padding: max(0px)) {
-  #incoming-call {
-    padding-left: max(24px, env(safe-area-inset-left));
-    padding-right: max(24px, env(safe-area-inset-right));
-    padding-bottom: max(30px, env(safe-area-inset-bottom));
-  }
-  
-  #in-call {
+  #onboarding, #home, #incoming-call, #in-call, #alert-screen, #contacts, #history {
     padding-left: max(20px, env(safe-area-inset-left));
     padding-right: max(20px, env(safe-area-inset-right));
-    padding-bottom: max(25px, env(safe-area-inset-bottom));
+    padding-bottom: max(30px, env(safe-area-inset-bottom));
   }
 }
