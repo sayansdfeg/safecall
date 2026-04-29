@@ -25,6 +25,7 @@ let state = {
   transcript: [],
   alertTriggered: false,
   vibrateInterval: null,
+  alertAudio: null,  // Добавлено для звука
   hasOnboarded: localStorage.getItem('senim_onboarded') === 'true'
 };
 
@@ -409,12 +410,29 @@ function clearAlert() {
     clearInterval(state.vibrateInterval);
     state.vibrateInterval = null;
   }
+  
+  // Остановка звука
+  if (state.alertAudio) {
+    state.alertAudio.pause();
+    state.alertAudio.currentTime = 0;
+    state.alertAudio = null;
+  }
+  
   document.body.style.animation = '';
   document.body.style.background = '';
 }
 
 function playAlarmSound() {
   try {
+    if (!state.alertAudio) {
+      state.alertAudio = new Audio('alert.mp3');  // Загрузка файла
+      state.alertAudio.loop = true;  // Повторение
+      state.alertAudio.volume = 1.0;  // Максимальная громкость
+    }
+    state.alertAudio.play();
+  } catch (e) {
+    console.log('Аудио недоступно, использую синтез');
+    // Fallback к синтезу, если файл не найден
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
@@ -433,8 +451,6 @@ function playAlarmSound() {
     
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 1);
-  } catch (e) {
-    console.log('Аудио недоступно');
   }
 }
 
