@@ -1,4 +1,4 @@
-const CACHE_NAME = 'safecall-v1';
+const CACHE_NAME = 'senim-kz-v1';
 const urlsToCache = [
   './',
   './index.html',

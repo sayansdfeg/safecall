@@ -1,5 +1,5 @@
 /**
- * SafeCall Guardian - Complete Application
+ * Senim.kz - Complete Application
  * Anti-scam protection app with real-time speech analysis
  */
 
@@ -25,7 +25,7 @@ let state = {
   transcript: [],
   alertTriggered: false,
   vibrateInterval: null,
-  hasOnboarded: localStorage.getItem('safecall_onboarded') === 'true'
+  hasOnboarded: localStorage.getItem('senim_onboarded') === 'true'
 };
 
 // ==================== DOM ELEMENTS ====================
@@ -62,7 +62,7 @@ const elements = {
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-  console.log('SafeCall Guardian инициализация...');
+  console.log('Senim.kz инициализация...');
   
   // Register service worker
   registerServiceWorker();
@@ -134,7 +134,7 @@ function showScreen(screenName) {
 
 // ==================== ONBOARDING ====================
 function handleStart() {
-  localStorage.setItem('safecall_onboarded', 'true');
+  localStorage.setItem('senim_onboarded', 'true');
   state.hasOnboarded = true;
   showScreen('home');
 }
@@ -471,7 +471,7 @@ function handleSOS() {
       // Try native share first
       if (navigator.share) {
         navigator.share({
-          title: 'SafeCall Guardian SOS',
+          title: 'Senim.kz SOS',
           text: message
         }).catch(err => console.log('Шaring бекітілді'));
       } else {
@@ -489,7 +489,7 @@ function handleSOS() {
 
 // ==================== CONTACTS ====================
 function loadContacts() {
-  const contacts = JSON.parse(localStorage.getItem('safecall_contacts') || '[]');
+  const contacts = JSON.parse(localStorage.getItem('senim_contacts') || '[]');
   
   elements.contactsList.innerHTML = contacts.map((contact, index) => `
     <div class="contact-item">
@@ -507,24 +507,24 @@ function addContact() {
     return;
   }
   
-  const contacts = JSON.parse(localStorage.getItem('safecall_contacts') || '[]');
+  const contacts = JSON.parse(localStorage.getItem('senim_contacts') || '[]');
   contacts.push(phone);
-  localStorage.setItem('safecall_contacts', JSON.stringify(contacts));
+  localStorage.setItem('senim_contacts', JSON.stringify(contacts));
   
   elements.contactInput.value = '';
   loadContacts();
 }
 
 function deleteContact(index) {
-  const contacts = JSON.parse(localStorage.getItem('safecall_contacts') || '[]');
+  const contacts = JSON.parse(localStorage.getItem('senim_contacts') || '[]');
   contacts.splice(index, 1);
-  localStorage.setItem('safecall_contacts', JSON.stringify(contacts));
+  localStorage.setItem('senim_contacts', JSON.stringify(contacts));
   loadContacts();
 }
 
 // ==================== HISTORY ====================
 function saveAlertToHistory() {
-  const history = JSON.parse(localStorage.getItem('safecall_history') || '[]');
+  const history = JSON.parse(localStorage.getItem('senim_history') || '[]');
   
   history.unshift({
     text: 'Обнаружена алаяқ',
@@ -537,11 +537,11 @@ function saveAlertToHistory() {
     history.pop();
   }
   
-  localStorage.setItem('safecall_history', JSON.stringify(history));
+  localStorage.setItem('senim_history', JSON.stringify(history));
 }
 
 function loadHistory() {
-  const history = JSON.parse(localStorage.getItem('safecall_history') || '[]');
+  const history = JSON.parse(localStorage.getItem('senim_history') || '[]');
   
   if (history.length === 0) {
     elements.historyList.innerHTML = '<p style="color: var(--ios-gray); text-align: center;">Еш ескерту жоқ</p>';
