@@ -62,7 +62,7 @@ const elements = {
 document.addEventListener('DOMContentLoaded', init);
 
 function init() {
-  console.log('SafeCall Guardian initializing...');
+  console.log('SafeCall Guardian инициализация...');
   
   // Register service worker
   registerServiceWorker();
@@ -89,8 +89,8 @@ function init() {
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
-      .then(reg => console.log('Service Worker registered'))
-      .catch(err => console.log('Service Worker registration failed:', err));
+      .then(reg => console.log('Service Worker зарегистрирован'))
+      .catch(err => console.log('Ошибка регистрации Service Worker:', err));
   }
 }
 
@@ -141,21 +141,21 @@ function handleStart() {
 
 // ==================== CALL HANDLING ====================
 function handleAcceptCall() {
-  console.log('Call accepted');
+  console.log('Звонок принят');
   triggerHaptic('medium');
   showScreen('in-call');
   startProtection();
 }
 
 function handleDeclineCall() {
-  console.log('Call declined');
+  console.log('Звонок отклонён');
   triggerHaptic('light');
   showScreen('home');
 }
 
 // ==================== PROTECTION ====================
 function startProtection() {
-  console.log('Starting protection...');
+  console.log('Защита активирована...');
   
   state.riskLevel = 0;
   state.alertTriggered = false;
@@ -175,19 +175,19 @@ function checkSpeechRecognitionSupport() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   
   if (!SpeechRecognition) {
-    console.log('Speech recognition not supported, enabling demo mode');
+    console.log('Распознавание речи не поддерживается, включён демо режим');
     state.isDemoMode = true;
     return;
   }
   
   navigator.mediaDevices.getUserMedia({ audio: true })
     .then(stream => {
-      console.log('Microphone access granted');
+      console.log('Доступ к микрофону разрешён');
       stream.getTracks().forEach(track => track.stop());
       state.isDemoMode = false;
     })
     .catch(err => {
-      console.log('Microphone access denied, enabling demo mode');
+      console.log('Доступ к микрофону запрещён, включён демо режим');
       state.isDemoMode = true;
     });
 }
@@ -217,7 +217,7 @@ function startSpeechRecognition() {
   };
   
   state.recognition.onerror = (event) => {
-    console.log('Speech recognition error:', event.error);
+    console.log('Ошибка распознавания речи:', event.error);
     if (event.error === 'not-allowed' || event.error === 'no-speech') {
       switchToDemoMode();
     }
@@ -234,14 +234,14 @@ function startSpeechRecognition() {
   try {
     state.recognition.start();
     state.isListening = true;
-    console.log('Speech recognition started');
+    console.log('Распознавание речи запущено');
   } catch (e) {
     switchToDemoMode();
   }
 }
 
 function switchToDemoMode() {
-  console.log('Switching to demo mode');
+  console.log('Переход в демо режим');
   state.isDemoMode = true;
   state.isListening = false;
   
@@ -256,7 +256,7 @@ function switchToDemoMode() {
 
 // ==================== DEMO MODE ====================
 function startDemoMode() {
-  console.log('Starting demo mode');
+  console.log('Демо режим запущен');
   elements.demoBadge.classList.remove('hidden');
   
   let messageIndex = 0;
@@ -313,13 +313,13 @@ function analyzeText(text) {
 
 // ==================== SPEECH PROCESSING ====================
 function processSpeech(text) {
-  console.log('Processing speech:', text);
+  console.log('Обработка речи:', text);
   
   setTimeout(() => {
     const aiScore = analyzeText(text);
     
     if (aiScore > 0) {
-      console.log('AI Risk Score:', aiScore);
+      console.log('Риск ИИ:', aiScore);
       const newRisk = Math.min(state.riskLevel + aiScore, CONFIG.maxRisk);
       updateRiskDisplay(newRisk);
       
@@ -342,7 +342,7 @@ function updateTranscript(text) {
     .map(t => `<div>${escapeHtml(t)}</div>`)
     .join('');
   
-  elements.transcript.innerHTML = transcriptHtml || '<span class="transcript-placeholder">Listening...</span>';
+  elements.transcript.innerHTML = transcriptHtml || '<span class="transcript-placeholder">Тыңдау...</span>';
 }
 
 function updateRiskDisplay(risk) {
@@ -364,7 +364,7 @@ function updateRiskDisplay(risk) {
 function triggerAlert() {
   if (state.alertTriggered) return;
   
-  console.log('ALERT TRIGGERED!');
+  console.log('ТРЕВОГА АКТИВИРОВАНА!');
   state.alertTriggered = true;
   state.isListening = false;
   
@@ -434,7 +434,7 @@ function playAlarmSound() {
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 1);
   } catch (e) {
-    console.log('Audio not available');
+    console.log('Аудио недоступно');
   }
 }
 
@@ -454,10 +454,10 @@ function speakWarning() {
 
 // ==================== SOS ====================
 function handleSOS() {
-  console.log('Sending SOS...');
+  console.log('Отправка SOS...');
   
   if (!navigator.geolocation) {
-    alert('Geolocation is not supported');
+    alert('Геолокация не поддерживается');
     return;
   }
   
@@ -473,7 +473,7 @@ function handleSOS() {
         navigator.share({
           title: 'SafeCall Guardian SOS',
           text: message
-        }).catch(err => console.log('Share cancelled'));
+        }).catch(err => console.log('Шaring бекітілді'));
       } else {
         // Fallback to SMS
         const smsUrl = `sms:?body=${encodeURIComponent(message)}`;
@@ -481,8 +481,8 @@ function handleSOS() {
       }
     },
     (error) => {
-      console.log('Geolocation error:', error);
-      alert('Could not get location. Please try again.');
+      console.log('Ошибка геолокации:', error);
+      alert('Не удалось получить местоположение. Попробуйте снова.');
     }
   );
 }
@@ -494,7 +494,7 @@ function loadContacts() {
   elements.contactsList.innerHTML = contacts.map((contact, index) => `
     <div class="contact-item">
       <span>${escapeHtml(contact)}</span>
-      <button class="delete-btn" onclick="deleteContact(${index})">Delete</button>
+      <button class="delete-btn" onclick="deleteContact(${index})">Жою</button>
     </div>
   `).join('');
 }
@@ -503,7 +503,7 @@ function addContact() {
   const phone = elements.contactInput.value.trim();
   
   if (!phone) {
-    alert('Please enter a phone number');
+    alert('Пожалуйста, введите номер телефона');
     return;
   }
   
@@ -527,7 +527,7 @@ function saveAlertToHistory() {
   const history = JSON.parse(localStorage.getItem('safecall_history') || '[]');
   
   history.unshift({
-    text: 'Scam detected',
+    text: 'Обнаружена алаяқ',
     risk: state.riskLevel,
     time: new Date().toLocaleString()
   });
@@ -544,14 +544,14 @@ function loadHistory() {
   const history = JSON.parse(localStorage.getItem('safecall_history') || '[]');
   
   if (history.length === 0) {
-    elements.historyList.innerHTML = '<p style="color: var(--ios-gray); text-align: center;">No alerts yet</p>';
+    elements.historyList.innerHTML = '<p style="color: var(--ios-gray); text-align: center;">Еш ескерту жоқ</p>';
     return;
   }
   
   elements.historyList.innerHTML = history.map(item => `
     <div class="history-item">
       <span>${escapeHtml(item.text)}</span>
-      <span class="history-risk" style="color: ${item.risk >= 80 ? 'var(--ios-red)' : 'var(--ios-orange)'}">Risk: ${item.risk}%</span>
+      <span class="history-risk" style="color: ${item.risk >= 80 ? 'var(--ios-red)' : 'var(--ios-orange)'}">Тəуекел: ${item.risk}%</span>
       <span class="history-time">${item.time}</span>
     </div>
   `).join('');
